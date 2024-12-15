@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Task from './Task';
 
-export const TaskList = () => {
-    const tasks = [
+const TaskList = () => {
+    const [tasks, setTasks] = useState([
         {
             id: 1,
             description: 'Completed task',
@@ -24,7 +24,17 @@ export const TaskList = () => {
             completed: false,
             editing: false,
         },
-    ];
+    ]);
+
+    const onDeleted = (id) => {
+        setTasks(tasks.filter((task) => task.id !== id));
+    };
+
+    const handleToggle = (id) => {
+        setTasks(
+            tasks.map((task) => (task.id === id ? { ...task, completed: !task.completed } : task)),
+        );
+    };
 
     return (
         <ul className="todo-list">
@@ -36,6 +46,8 @@ export const TaskList = () => {
                     created={task.created}
                     completed={task.completed}
                     editing={task.editing}
+                    onDeleted={onDeleted}
+                    handleToggle={handleToggle}
                 />
             ))}
         </ul>
