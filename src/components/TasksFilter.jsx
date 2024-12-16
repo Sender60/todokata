@@ -1,16 +1,28 @@
 import React from 'react';
 
-const TasksFilter = () => {
+const TasksFilter = ({ filter, onFilterChange }) => {
     return (
         <ul className="filters">
             <li>
-                <button className="selected">All</button>
+                <button
+                    className={filter === 'All' ? 'selected' : ''}
+                    onClick={() => onFilterChange('All')}>
+                    All
+                </button>
             </li>
             <li>
-                <button>Active</button>
+                <button
+                    className={filter === 'Active' ? 'selected' : ''}
+                    onClick={() => onFilterChange('Active')}>
+                    Active
+                </button>
             </li>
             <li>
-                <button>Completed</button>
+                <button
+                    className={filter === 'Completed' ? 'selected' : ''}
+                    onClick={() => onFilterChange('Completed')}>
+                    Completed
+                </button>
             </li>
         </ul>
     );

@@ -1,29 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-export const Task = ({ id, description, created, completed, editing, onDeleted, handleToggle }) => {
+export const Task = ({
+    task,
+    handleDeletedTask,
+    handleToggle,
+    handleEditingTask,
+    handleKeyDownEditingTask,
+}) => {
+    const [isDescription, setDescription] = useState(task.description);
+
     return (
         <>
-            <li className={completed ? 'completed' : editing ? 'editing' : ''}>
+            <li className={task.completed ? 'completed' : task.editing ? 'editing' : ''}>
                 <div className="view">
                     <input
                         className="toggle"
                         type="checkbox"
-                        checked={completed}
-                        onChange={() => handleToggle(id)}
+                        checked={task.completed}
+                        onChange={() => handleToggle(task.id)}
                     />
                     <label>
-                        <span className="description">{description}</span>
-                        <span className="created">{created}</span>
+                        <span className="description">{task.description}</span>
+                        <span className="created">{task.created}</span>
                     </label>
-                    <button className="icon icon-edit"></button>
-                    <button onClick={() => onDeleted(id)} className="icon icon-destroy"></button>
+                    <button
+                        onClick={() => handleEditingTask(task.id)}
+                        className="icon icon-edit"></button>
+                    <button
+                        onClick={() => handleDeletedTask(task.id)}
+                        className="icon icon-destroy"></button>
                 </div>
-                {editing && (
+                {task.editing && (
                     <input
                         type="text"
                         className="edit"
-                        value={description}
-                        onChange={(e) => (description = e.target.value)}
+                        value={isDescription}
+                        onChange={(e) => setDescription(e.target.value)}
+                        onKeyDown={(e) => handleKeyDownEditingTask(e, task.id, isDescription)}
                     />
                 )}
             </li>
