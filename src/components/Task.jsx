@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { formatDistanceToNowStrict } from 'date-fns';
+import { ru } from 'date-fns/locale';
 
 export const Task = ({
     task,
@@ -21,7 +23,12 @@ export const Task = ({
                     />
                     <label>
                         <span className="description">{task.description}</span>
-                        <span className="created">{task.created}</span>
+                        <span className="created">
+                            {formatDistanceToNowStrict(task.created, {
+                                addSuffix: true,
+                                locale: ru,
+                            })}
+                        </span>
                     </label>
                     <button
                         onClick={() => handleEditingTask(task.id)}

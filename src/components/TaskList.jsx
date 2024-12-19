@@ -1,5 +1,6 @@
 import React from 'react';
 import Task from './Task';
+import propTypes from 'prop-types';
 
 const TaskList = ({
     filteredTasks,
@@ -22,6 +23,21 @@ const TaskList = ({
             ))}
         </ul>
     );
+};
+
+TaskList.defaultProps = {
+    filteredTasks: [],
+    handleDeletedTask: () => {},
+    handleToggle: () => {},
+    handleEditingTask: () => {},
+    handleKeyDownEditingTask: () => {},
+};
+TaskList.propTypes = {
+    filteredTasks: propTypes.array,
+    handleDeletedTask: propTypes.func,
+    handleToggle: propTypes.func,
+    handleEditingTask: propTypes.func,
+    handleKeyDownEditingTask: propTypes.func,
 };
 
 export default TaskList;

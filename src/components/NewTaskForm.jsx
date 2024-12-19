@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 
 const NewTaskForm = ({ handleAddTask }) => {
     const onKeyDown = (e) => {
@@ -19,6 +20,13 @@ const NewTaskForm = ({ handleAddTask }) => {
             />
         </header>
     );
+};
+
+NewTaskForm.defaultProps = {
+    handleAddTask: () => {},
+};
+NewTaskForm.propTypes = {
+    handleAddTask: propTypes.func,
 };
 
 export default NewTaskForm;

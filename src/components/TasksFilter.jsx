@@ -1,6 +1,11 @@
 import React from 'react';
 
 const TasksFilter = ({ filter, onFilterChange }) => {
+    TasksFilter.defaultProps = {
+        filter: 'All',
+        onFilterChange: () => {},
+    };
+
     return (
         <ul className="filters">
             <li>
