@@ -8,7 +8,6 @@ const Footer = ({ tasksCompleted, clearTasks, filter, onFilterChange }) => {
       {tasksCompleted}
       {tasksCompleted === 1 ? 'item' : 'items'}
       {console.log(tasksCompleted)}
-      {console.log(tasksCompleted)}
       left
     </span>
     <TasksFilter filter={filter} onFilterChange={onFilterChange} />
