@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { ru } from 'date-fns/locale';
+import Timer from './Timer';
 
-const Task = ({
-  task,
-  handleDeletedTask,
-  handleToggle,
-  handleEditingTask,
-  handleKeyDownEditingTask,
-}) => {
+const Task = ({ task, handleDeletedTask, handleToggle, handleEditingTask, handleKeyDownEditingTask }) => {
   const [isDescription, setDescription] = useState(task.description);
 
   let className = '';
@@ -22,7 +17,7 @@ const Task = ({
     <li className={className}>
       <div className="view">
         <input
-          id="toggle"
+          id={`toggle-${task.id}`}
           className="toggle"
           type="checkbox"
           checked={task.completed}
@@ -30,6 +25,7 @@ const Task = ({
         />
         <label htmlFor="toggle">
           <span className="description">{task.description}</span>
+          <Timer minutes={task.minutes} seconds={task.seconds} />
           <span className="created">
             {formatDistanceToNowStrict(task.created, {
               addSuffix: true,

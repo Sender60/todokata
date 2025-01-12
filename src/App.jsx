@@ -11,6 +11,8 @@ function App() {
       created: new Date(Date.now() - 17 * 1000 * 60),
       completed: true,
       editing: false,
+      minutes: 20,
+      seconds: 0,
     },
     {
       id: 2,
@@ -18,6 +20,8 @@ function App() {
       created: new Date(Date.now() - 5 * 1000 * 60),
       completed: false,
       editing: true,
+      minutes: 20,
+      seconds: 0,
     },
     {
       id: 3,
@@ -25,6 +29,8 @@ function App() {
       created: new Date(Date.now() - 5 * 1000 * 60),
       completed: false,
       editing: false,
+      minutes: 20,
+      seconds: 0,
     },
   ]);
 
@@ -34,7 +40,7 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
-  const handleAddTask = (description) => {
+  const handleAddTask = (description, minutes, seconds) => {
     const id = tasks.length ? tasks[tasks.length - 1].id + 1 : 1;
     const created = new Date().toString();
     const completed = false;
@@ -48,21 +54,19 @@ function App() {
         created,
         completed,
         editing,
+        minutes,
+        seconds,
       },
     ]);
   };
 
   const handleToggle = (id) => {
-    setTasks(
-      tasks.map((task) => (task.id === id ? { ...task, completed: !task.completed } : task)),
-    );
+    setTasks(tasks.map((task) => (task.id === id ? { ...task, completed: !task.completed } : task)));
   };
   const tasksCompleted = tasks.filter((task) => !task.completed).length;
 
   const handleEditingTask = (id) => {
-    setTasks(
-      tasks.map((task) => (task.id === id ? { ...task, editing: true, completed: false } : task)),
-    );
+    setTasks(tasks.map((task) => (task.id === id ? { ...task, editing: true, completed: false } : task)));
   };
 
   const handleKeyDownEditingTask = (e, id, newDescription) => {

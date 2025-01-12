@@ -2,13 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import Task from './Task';
 
-const TaskList = ({
-  filteredTasks,
-  handleDeletedTask,
-  handleToggle,
-  handleEditingTask,
-  handleKeyDownEditingTask,
-}) => (
+const TaskList = ({ filteredTasks, handleDeletedTask, handleToggle, handleEditingTask, handleKeyDownEditingTask }) => (
   <ul className="todo-list">
     {filteredTasks.map((task) => (
       <Task
