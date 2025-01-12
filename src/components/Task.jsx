@@ -25,7 +25,7 @@ const Task = ({ task, handleDeletedTask, handleToggle, handleEditingTask, handle
         />
         <label htmlFor="toggle">
           <span className="description">{task.description}</span>
-          <Timer minutes={task.minutes} seconds={task.seconds} />
+          <Timer minutes={task.minutes} seconds={task.seconds} completed={task.completed} />
           <span className="created">
             {formatDistanceToNowStrict(task.created, {
               addSuffix: true,

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import useNow from '../hooks/useNow';
 
-const Timer = ({ minutes, seconds }) => {
+const Timer = ({ minutes, seconds, completed }) => {
   const [isPaused, setIsPaused] = useState(true);
   const [startAt, setStartAt] = useState();
   const [initialTimer, setInitialTimer] = useState(0);
@@ -28,6 +28,14 @@ const Timer = ({ minutes, seconds }) => {
     }
   }, [isCountEnd]);
 
+  useEffect(() => {
+    if (completed) {
+      setInitialTimer(timer);
+      setStartAt();
+      setIsPaused(true);
+    }
+  }, [completed]);
+
   const handlePausePlay = () => {
     setIsPaused(!isPaused);
     toggleTimer();
@@ -44,7 +52,7 @@ const Timer = ({ minutes, seconds }) => {
           className="icon icon-play"
           aria-label="play"
           onClick={handlePausePlay}
-          disabled={countDown <= 0}
+          disabled={countDown <= 0 || completed}
         />
       )}
       {!isPaused && <button type="button" className="icon icon-pause" aria-label="pause" onClick={handlePausePlay} />}
