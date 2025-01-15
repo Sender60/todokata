@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { ru } from 'date-fns/locale';
+import cn from 'classnames';
 import Timer from './Timer';
 
 const Task = ({ task, handleDeletedTask, handleToggle, handleEditingTask, handleKeyDownEditingTask }) => {
   const [isDescription, setDescription] = useState(task.description);
 
-  let className = '';
-  if (task.completed) {
-    className = 'completed';
-  } else if (task.editing) {
-    className = 'editing';
-  }
+  const className = cn('task', {
+    completed: task.completed,
+    editing: task.editing,
+  });
 
   return (
     <li className={className}>
@@ -25,7 +24,7 @@ const Task = ({ task, handleDeletedTask, handleToggle, handleEditingTask, handle
         />
         <label htmlFor="toggle">
           <span className="description">{task.description}</span>
-          <Timer minutes={task.minutes} seconds={task.seconds} completed={task.completed} />
+          <Timer seconds={task.seconds} completed={task.completed} />
           <span className="created">
             {formatDistanceToNowStrict(task.created, {
               addSuffix: true,

@@ -11,8 +11,7 @@ function App() {
       created: new Date(Date.now() - 17 * 1000 * 60),
       completed: true,
       editing: false,
-      minutes: 20,
-      seconds: 0,
+      seconds: 1200,
     },
     {
       id: 2,
@@ -21,7 +20,7 @@ function App() {
       completed: false,
       editing: true,
       minutes: 20,
-      seconds: 0,
+      seconds: 1200,
     },
     {
       id: 3,
@@ -30,7 +29,7 @@ function App() {
       completed: false,
       editing: false,
       minutes: 20,
-      seconds: 0,
+      seconds: 1200,
     },
   ]);
 
@@ -54,7 +53,6 @@ function App() {
         created,
         completed,
         editing,
-        minutes,
         seconds,
       },
     ]);

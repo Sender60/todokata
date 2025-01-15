@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import useNow from '../hooks/useNow';
 
-const Timer = ({ minutes, seconds, completed }) => {
+const Timer = ({ seconds, completed }) => {
   const [isPaused, setIsPaused] = useState(true);
   const [startAt, setStartAt] = useState();
   const [initialTimer, setInitialTimer] = useState(0);
@@ -9,7 +9,7 @@ const Timer = ({ minutes, seconds, completed }) => {
   const now = useNow(100, startAt);
   const timeFromStart = now - (startAt || now);
   const timer = timeFromStart + initialTimer;
-  const countDown = minutes * 60 * 1000 + seconds * 1000 - timer;
+  const countDown = seconds * 1000 - timer;
   const isCountEnd = countDown <= 0;
 
   const toggleTimer = () => {
