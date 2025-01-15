@@ -7,14 +7,17 @@ const NewTaskForm = ({ handleAddTask }) => {
   const [seconds, setSeconds] = useState('');
   const [errorMinutes, setErrorMInutes] = useState('');
   const [errorSeconds, setErrorSeconds] = useState('');
+  const [taskValue, setTaskValue] = useState(1);
 
   const onKeyDown = (e) => {
     if (e.key === 'Enter') {
       if (errorMinutes !== '' || errorSeconds !== '') return;
-      handleAddTask(value, minutes * 60 + Number(seconds));
+      const newValue = value === '' ? `Неизвестная задача ${taskValue}` : value;
+      handleAddTask(newValue, minutes * 60 + Number(seconds));
       setValue('');
       setMinutes('');
       setSeconds('');
+      setTaskValue(taskValue + 1);
     }
   };
 
