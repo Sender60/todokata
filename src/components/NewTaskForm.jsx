@@ -11,7 +11,7 @@ const NewTaskForm = ({ handleAddTask }) => {
   const onKeyDown = (e) => {
     if (e.key === 'Enter') {
       if (errorMinutes !== '' || errorSeconds !== '') return;
-      handleAddTask(value, minutes, seconds);
+      handleAddTask(value, minutes * 60 + Number(seconds));
       setValue('');
       setMinutes('');
       setSeconds('');

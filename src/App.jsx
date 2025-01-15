@@ -19,7 +19,6 @@ function App() {
       created: new Date(Date.now() - 5 * 1000 * 60),
       completed: false,
       editing: true,
-      minutes: 20,
       seconds: 1200,
     },
     {
@@ -28,7 +27,6 @@ function App() {
       created: new Date(Date.now() - 5 * 1000 * 60),
       completed: false,
       editing: false,
-      minutes: 20,
       seconds: 1200,
     },
   ]);
@@ -39,7 +37,7 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
-  const handleAddTask = (description, minutes, seconds) => {
+  const handleAddTask = (description, seconds) => {
     const id = tasks.length ? tasks[tasks.length - 1].id + 1 : 1;
     const created = new Date().toString();
     const completed = false;
