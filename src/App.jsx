@@ -65,7 +65,7 @@ function App() {
     setTasks(tasks.map((task) => (task.id === id ? { ...task, editing: true, completed: false } : task)));
   };
 
-  const handleKeyDownEditingTask = (e, id, newDescription) => {
+  const handleKeyDownEditingTask = (e, id, newDescription, originalDescription, setDescription) => {
     if (e.key === 'Enter') {
       setTasks(
         tasks.map((task) => {
@@ -81,40 +81,46 @@ function App() {
         }),
       );
     }
+    if (e.key === 'Escape') {
+      setTasks(
+        tasks.map((task) => {
+          if (task.id === id) {
+            return {
+              ...task,
+              editing: false,
+              completed: false,
+              description: originalDescription,
+            };
+          }
+          return task;
+        }),
+      );
+      setDescription(originalDescription);
+    }
   };
 
-  const filteredTasks = tasks.filter((task) => {
-    switch (filter) {
-      case 'All':
-        return task;
-      case 'Active':
-        return !task.completed;
-      case 'Completed':
-        return task.completed;
-      default:
-        return task;
-    }
-  });
-
   const handleFilterChange = (filterChange) => setFilter(filterChange);
+
+  const clearCompletedTasks = () => setTasks(tasks.filter((task) => !task.completed));
 
   return (
     <section className="todoapp">
       <NewTaskForm handleAddTask={handleAddTask} />
       <section className="main">
         <TaskList
-          filteredTasks={filteredTasks}
+          tasks={tasks}
           handleDeletedTask={handleDeletedTask}
           handleToggle={handleToggle}
           handleEditingTask={handleEditingTask}
           handleKeyDownEditingTask={handleKeyDownEditingTask}
+          filter={filter}
         />
       </section>
       <Footer
         filter={filter}
         onFilterChange={handleFilterChange}
         tasksCompleted={tasksCompleted}
-        clearTasks={() => setTasks([])}
+        clearCompletedTasks={clearCompletedTasks}
       />
     </section>
   );

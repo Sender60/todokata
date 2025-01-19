@@ -2,9 +2,9 @@ import React from 'react';
 import propTypes from 'prop-types';
 import Task from './Task';
 
-const TaskList = ({ filteredTasks, handleDeletedTask, handleToggle, handleEditingTask, handleKeyDownEditingTask }) => (
+const TaskList = ({ tasks, handleDeletedTask, handleToggle, handleEditingTask, handleKeyDownEditingTask, filter }) => (
   <ul className="todo-list">
-    {filteredTasks.map((task) => (
+    {tasks.map((task) => (
       <Task
         key={task.id}
         task={task}
@@ -12,20 +12,23 @@ const TaskList = ({ filteredTasks, handleDeletedTask, handleToggle, handleEditin
         handleToggle={handleToggle}
         handleEditingTask={handleEditingTask}
         handleKeyDownEditingTask={handleKeyDownEditingTask}
+        className={
+          filter === 'All' || (filter === 'Active' && !task.completed) || (filter === 'Completed' && task.completed)
+            ? ''
+            : 'hidden'
+        }
       />
     ))}
   </ul>
 );
 
 TaskList.defaultProps = {
-  filteredTasks: [],
   handleDeletedTask: () => {},
   handleToggle: () => {},
   handleEditingTask: () => {},
   handleKeyDownEditingTask: () => {},
 };
 TaskList.propTypes = {
-  filteredTasks: propTypes.arrayOf(),
   handleDeletedTask: propTypes.func,
   handleToggle: propTypes.func,
   handleEditingTask: propTypes.func,

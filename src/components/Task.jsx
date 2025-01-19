@@ -4,16 +4,16 @@ import { ru } from 'date-fns/locale';
 import cn from 'classnames';
 import Timer from './Timer';
 
-const Task = ({ task, handleDeletedTask, handleToggle, handleEditingTask, handleKeyDownEditingTask }) => {
+const Task = ({ task, handleDeletedTask, handleToggle, handleEditingTask, handleKeyDownEditingTask, className }) => {
   const [isDescription, setDescription] = useState(task.description);
 
-  const className = cn('task', {
+  const taskClassName = cn('task', {
     completed: task.completed,
     editing: task.editing,
   });
 
   return (
-    <li className={className}>
+    <li className={cn(taskClassName, className)}>
       <div className="view">
         <input
           id={`toggle-${task.id}`}
@@ -51,7 +51,7 @@ const Task = ({ task, handleDeletedTask, handleToggle, handleEditingTask, handle
           className="edit"
           value={isDescription}
           onChange={(e) => setDescription(e.target.value)}
-          onKeyDown={(e) => handleKeyDownEditingTask(e, task.id, isDescription)}
+          onKeyDown={(e) => handleKeyDownEditingTask(e, task.id, isDescription, task.description, setDescription)}
         />
       )}
     </li>
